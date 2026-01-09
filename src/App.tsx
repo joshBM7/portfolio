@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Menu } from 'lucide-react'
 import Sidebar from './components/Sidebar'
 import Home from './components/Home'
 import About from './components/About'
@@ -13,6 +14,7 @@ import { LanguageProvider } from './context/LanguageContext'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
   useEffect(() => {
     const logWindowSize = () => {
@@ -45,10 +47,19 @@ function App() {
   return (
     <LanguageProvider>
         <div className="min-h-screen bg-slate-900 text-white z-10">
-          <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
-          
+          <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+
+          {/* Bouton toggle sidebar pour desktop */}
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="lg:block hidden fixed top-4 left-4 z-40 p-3 bg-slate-800 rounded-lg shadow-lg hover:bg-cyan-500 transition-colors duration-300"
+            title={isSidebarOpen ? 'Masquer la sidebar' : 'Afficher la sidebar'}
+          >
+            <Menu size={20} className="text-cyan-400" />
+          </button>
+
           {/* Contenu principal avec marge responsive */}
-          <div className="lg:ml-80 ml-0">
+          <div className={`${isSidebarOpen ? 'lg:ml-80' : 'lg:ml-0'} ml-0 lg:pl-16`}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeSection}

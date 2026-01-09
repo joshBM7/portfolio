@@ -7,9 +7,11 @@ import { useLanguage } from '../context/LanguageContext'
 interface SidebarProps {
   activeSection: string
   setActiveSection: (section: string) => void
+  isSidebarOpen: boolean
+  setIsSidebarOpen: (open: boolean) => void
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) => {
+const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSidebarOpen, setIsSidebarOpen }) => {
   const { language, toggleLanguage, t } = useLanguage()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -71,8 +73,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
         }}
         className={`
              fixed left-0 top-0 h-full w-48 lg:w-80 bg-slate-800 shadow-2xl z-50 flex flex-col
-             lg:translate-x-0
-             ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+             ${isSidebarOpen ? 'lg:translate-x-0' : 'lg:-translate-x-full'}
+             ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
              transition-transform duration-300 ease-in-out
            `}
       >
