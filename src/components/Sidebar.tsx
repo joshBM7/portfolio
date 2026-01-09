@@ -85,19 +85,33 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
           >
             Josh
           </motion.h1>
-          {/* Bouton de changement de langue dans le header */}
-          <motion.button
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={toggleLanguage}
-            className="p-2 rounded-full bg-slate-700 hover:bg-cyan-500 transition-colors duration-300 text-gray-300 hover:text-white flex items-center space-x-1"
-            title={language === 'fr' ? 'Switch to English' : 'Passer en français'}
-          >
-            <Languages size={16} className="text-current" />
-            <span className="text-xs font-bold uppercase">{language}</span>
-          </motion.button>
+          <div className="flex items-center space-x-2">
+            {/* Bouton de changement de langue dans le header */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={toggleLanguage}
+              className="p-2 rounded-full bg-slate-700 hover:bg-cyan-500 transition-colors duration-300 text-gray-300 hover:text-white flex items-center space-x-1"
+              title={language === 'fr' ? 'Switch to English' : 'Passer en français'}
+            >
+              <Languages size={16} className="text-current" />
+              <span className="text-xs font-bold uppercase">{language}</span>
+            </motion.button>
+            {/* Bouton fermer pour mobile */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="lg:hidden p-2 rounded-full bg-slate-700 hover:bg-red-500 transition-colors duration-300 text-gray-300 hover:text-white"
+              title="Fermer le menu"
+            >
+              <X size={16} className="text-current" />
+            </motion.button>
+          </div>
         </div>
 
         {/* Navigation */}
