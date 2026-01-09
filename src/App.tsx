@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Sidebar from './components/Sidebar'
 import Home from './components/Home'
@@ -13,6 +13,15 @@ import { LanguageProvider } from './context/LanguageContext'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
+
+  useEffect(() => {
+    const logWindowSize = () => {
+      console.log(`Window size: ${window.innerWidth}x${window.innerHeight}`)
+    }
+    logWindowSize()
+    window.addEventListener('resize', logWindowSize)
+    return () => window.removeEventListener('resize', logWindowSize)
+  }, [])
 
     const renderSection = () => {
     switch (activeSection) {

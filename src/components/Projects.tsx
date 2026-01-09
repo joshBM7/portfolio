@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Code, Smartphone, Database} from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
 const Projects: React.FC = () => {
   const { t } = useLanguage()
+
+  useEffect(() => {
+    console.log('Projects component mounted')
+  }, [])
 
   const featuredProjects = [
     {
@@ -91,7 +95,7 @@ const Projects: React.FC = () => {
         </motion.h2>
 
         {/* Projets phares */}
-        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 mb-16">
           {featuredProjects.map((project, index) => {
             return (
               <motion.div
@@ -107,6 +111,8 @@ const Projects: React.FC = () => {
                     src={project.image}
                     alt={project.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                    onLoad={() => console.log(`Image loaded for ${project.title}`)}
+                    onError={() => console.error(`Image failed to load for ${project.title}`)}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
                 </div>

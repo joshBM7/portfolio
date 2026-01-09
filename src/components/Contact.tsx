@@ -12,6 +12,7 @@ const Contact: React.FC = () => {
     subject: '',
     message: ''
   })
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -23,7 +24,9 @@ const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     console.log('Form submitted:', formData)
+    setIsSubmitted(true)
     // Ici vous pourriez intégrer l'envoi d'email
+    setTimeout(() => setIsSubmitted(false), 3000) // Reset after 3 seconds
   }
 
   const contactInfo = [
@@ -226,6 +229,16 @@ const Contact: React.FC = () => {
                 <Send size={20} />
                 <span>Envoyer le message</span>
               </motion.button>
+
+              {isSubmitted && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-4 p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400 text-center"
+                >
+                  Message envoyé avec succès !
+                </motion.div>
+              )}
             </form>
           </motion.div>
         </div>

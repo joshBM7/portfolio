@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
         `}
       >
         {/* Header avec nom */}
-        <div className="p-8 border-b border-slate-700">
+        <div className="p-8 border-b border-slate-700 flex justify-between items-center">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,6 +79,19 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
           >
             Josh
           </motion.h1>
+          {/* Bouton de changement de langue dans le header */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={toggleLanguage}
+            className="p-2 rounded-full bg-slate-700 hover:bg-cyan-500 transition-colors duration-300 text-gray-300 hover:text-white flex items-center space-x-1"
+            title={language === 'fr' ? 'Switch to English' : 'Passer en français'}
+          >
+            <Languages size={16} className="text-current" />
+            <span className="text-xs font-bold uppercase">{language}</span>
+          </motion.button>
         </div>
 
         {/* Navigation */}
@@ -110,27 +123,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
           </ul>
         </nav>
 
-        {/* Contrôles de langue */}
-        <div className="p-6 border-t border-slate-700">
-          <div className="flex justify-center">
-            {/* Bouton de changement de langue */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={toggleLanguage}
-              className="p-3 rounded-full bg-slate-700 hover:bg-cyan-500 transition-colors duration-300 text-gray-300 hover:text-white flex items-center space-x-1"
-              title={language === 'fr' ? 'Switch to English' : 'Passer en français'}
-            >
-              <Languages size={16} className="text-current" />
-              <span className="text-xs font-bold uppercase">{language}</span>
-            </motion.button>
-          </div>
-          
-          {/* Indicateurs visuels */}
-          <div className="mt-4 text-center">
-            <div className="text-xs text-gray-400">
-              <div>Langue: {language === 'fr' ? 'Français' : 'English'}</div>
-            </div>
+        {/* Indicateurs visuels */}
+        <div className="p-6 border-t border-slate-700 text-center">
+          <div className="text-xs text-gray-400">
+            <div>Langue: {language === 'fr' ? 'Français' : 'English'}</div>
           </div>
         </div>
       </motion.div>

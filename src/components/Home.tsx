@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import {Github, Mail, Linkedin} from 'lucide-react'
+import {Github, Mail, Linkedin, Code, Monitor, Server, Database, Wrench, Globe} from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
 // Icônes des technologies pour l'effet neige
@@ -32,16 +32,16 @@ const Home: React.FC<HomeProps> = ({ setActiveSection }) => {
 
   // Technologies pour l'effet neige
   const techIcons = [
-    { name: 'React', component: () => <div className="text-2xl">⚛️</div> },
-    { name: 'Django', component: () => <div className="text-2xl">🐍</div> },
-    { name: 'Laravel', component: () => <div className="text-2xl">🔧</div> },
-    { name: 'MySQL', component: () => <div className="text-2xl">🗄️</div> },
-    { name: 'JavaScript', component: () => <div className="text-2xl">📜</div> },
-    { name: 'C++', component: () => <div className="text-2xl">⚙️</div> },
-    { name: 'HTML', component: () => <div className="text-2xl">🌐</div> },
-    { name: 'CSS', component: () => <div className="text-2xl">🎨</div> },
-    { name: 'PHP', component: () => <div className="text-2xl">🐘</div> },
-    { name: 'Git', component: () => <div className="text-2xl">📚</div> }
+    { name: 'React', component: () => <Code size={24} /> },
+    { name: 'Django', component: () => <Server size={24} /> },
+    { name: 'Laravel', component: () => <Wrench size={24} /> },
+    { name: 'MySQL', component: () => <Database size={24} /> },
+    { name: 'JavaScript', component: () => <Monitor size={24} /> },
+    { name: 'C++', component: () => <Code size={24} /> },
+    { name: 'HTML', component: () => <Globe size={24} /> },
+    { name: 'CSS', component: () => <Monitor size={24} /> },
+    { name: 'PHP', component: () => <Server size={24} /> },
+    { name: 'Git', component: () => <Wrench size={24} /> }
   ]
 
   // Animation du curseur clignotant

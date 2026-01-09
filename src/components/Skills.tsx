@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
+import { Code, Monitor, Server, Database, Wrench, Globe } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
 const Skills: React.FC = () => {
@@ -10,6 +11,7 @@ const Skills: React.FC = () => {
     {
       title: t('skills.programming'),
       color: 'from-indigo-500 to-purple-500',
+      icon: Code,
       skills: [
         { name: 'Python', level: 75 },
         { name: 'Java', level: 70 }
@@ -18,6 +20,7 @@ const Skills: React.FC = () => {
     {
       title: t('skills.frontend'),
       color: 'from-orange-500 to-red-500',
+      icon: Monitor,
       skills: [
         { name: 'React', level: 85 },
         { name: 'React Native', level: 80 },
@@ -29,6 +32,7 @@ const Skills: React.FC = () => {
     {
       title: t('skills.backend'),
       color: 'from-green-500 to-blue-500',
+      icon: Server,
       skills: [
         { name: '.NET', level: 65 },
         { name: 'PHP', level: 65 },
@@ -38,6 +42,7 @@ const Skills: React.FC = () => {
     {
       title: t('skills.data'),
       color: 'from-blue-500 to-cyan-500',
+      icon: Database,
       skills: [
         { name: 'SQL', level: 73 },
         { name: 'Big Data', level: 65 },
@@ -49,6 +54,7 @@ const Skills: React.FC = () => {
     {
       title: t('skills.tools'),
       color: 'from-purple-500 to-pink-500',
+      icon: Wrench,
       skills: [
         { name: 'Excel', level: 77 },
         { name: 'Power BI', level: 73 },
@@ -60,6 +66,7 @@ const Skills: React.FC = () => {
     {
       title: t('skills.languages'),
       color: 'from-yellow-500 to-orange-500',
+      icon: Globe,
       skills: [
         { name: 'Français', level: 85 },
         { name: 'Anglais', level: 60 },
@@ -88,9 +95,12 @@ const Skills: React.FC = () => {
               transition={{ delay: categoryIndex * 0.2 }}
               className="bg-slate-800/50 backdrop-blur-sm p-6 rounded-xl border border-slate-700 hover:border-cyan-500 transition-all duration-300"
             >
-              <h3 className={`text-2xl font-bold mb-6 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
-                {category.title}
-              </h3>
+              <div className="flex items-center space-x-3 mb-6">
+                <category.icon className={`w-8 h-8 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`} />
+                <h3 className={`text-2xl font-bold bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
+                  {category.title}
+                </h3>
+              </div>
 
               <div className="space-y-4">
                 {category.skills.map((skill, skillIndex) => (
