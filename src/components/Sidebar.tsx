@@ -102,17 +102,16 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSi
               <span className="text-xs font-bold uppercase">{language}</span>
             </motion.button>
             {/* Bouton fermer pour mobile */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="lg:hidden p-2 rounded-full bg-slate-700 hover:bg-red-500 transition-colors duration-300 text-gray-300 hover:text-white"
+            <button
+              onClick={() => {
+                console.log('Close button clicked')
+                setIsMobileMenuOpen(false)
+              }}
+              className="lg:hidden p-3 rounded-full bg-slate-700 hover:bg-red-500 transition-colors duration-300 text-gray-300 hover:text-white"
               title="Fermer le menu"
             >
-              <X size={16} className="text-current" />
-            </motion.button>
+              <X size={20} className="text-current" />
+            </button>
           </div>
         </div>
 
