@@ -5,7 +5,7 @@ import {Github, Mail, Linkedin, Code, Monitor, Server, Database, Wrench, Globe} 
 import { useLanguage } from '../context/LanguageContext'
 
 // Icônes des technologies pour l'effet neige
-const TechIcon = ({ icon: Icon, x, delay, duration }: { icon: any, x: number, delay: number, duration: number }) => (
+const TechIcon = ({ icon: Icon, x, delay, duration }: { icon: React.ComponentType<{ size: number }>, x: number, delay: number, duration: number }) => (
   <motion.div
     initial={{ y: -100, x, opacity: 0.3 }}
     animate={{ y: window.innerHeight + 100, opacity: 0.1 }}
@@ -76,7 +76,7 @@ const Home: React.FC<HomeProps> = ({ setActiveSection }) => {
     generateSnowflakes()
     const interval = setInterval(generateSnowflakes, 12000)
     return () => clearInterval(interval)
-  }, [])
+  }, [techIcons])
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden">

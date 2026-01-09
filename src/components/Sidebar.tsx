@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {Home, User, GraduationCap, Code, Briefcase, Mail, Languages, Menu, X} from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -8,10 +8,9 @@ interface SidebarProps {
   activeSection: string
   setActiveSection: (section: string) => void
   isSidebarOpen: boolean
-  setIsSidebarOpen: (open: boolean) => void
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSidebarOpen, setIsSidebarOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSidebarOpen }) => {
   const { language, toggleLanguage, t } = useLanguage()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024)
@@ -72,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSi
       <motion.div
         initial={{ x: -300 }}
         animate={{
-          x: isMobile ? (isMobileMenuOpen ? 0 : -300) : (isSidebarOpen ? 0 : -300)
+          x: isMobile ? (isMobileMenuOpen ? 0 : -300) : 0
         }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="fixed left-0 top-0 h-full w-48 lg:w-80 bg-slate-800 shadow-2xl z-50 flex flex-col"
