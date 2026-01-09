@@ -33,7 +33,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        onClick={() => {
+          console.log('Hamburger clicked, toggling menu')
+          setIsMobileMenuOpen(!isMobileMenuOpen)
+        }}
         className="lg:hidden fixed top-4 left-4 z-50 p-3 bg-slate-800 rounded-lg shadow-lg"
       >
         {isMobileMenuOpen ? (
@@ -50,7 +53,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={() => {
+              console.log('Overlay clicked, closing menu')
+              setIsMobileMenuOpen(false)
+            }}
             className="lg:hidden fixed inset-0 bg-black/50 z-40"
           />
         )}

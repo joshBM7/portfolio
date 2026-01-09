@@ -44,7 +44,7 @@ function App() {
 
   return (
     <LanguageProvider>
-        <div className="min-h-screen bg-slate-900 text-white">
+        <div className="min-h-screen bg-slate-900 text-white z-10">
           <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} />
           
           {/* Contenu principal avec marge responsive */}
