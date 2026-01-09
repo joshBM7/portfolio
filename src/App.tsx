@@ -47,7 +47,7 @@ function App() {
   return (
     <LanguageProvider>
         <div className="min-h-screen bg-slate-900 text-white z-10">
-          <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+          <Sidebar activeSection={activeSection} setActiveSection={setActiveSection} isSidebarOpen={isSidebarOpen} />
 
           {/* Bouton toggle sidebar pour desktop */}
           <button
