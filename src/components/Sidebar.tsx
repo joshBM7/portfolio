@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {Home, User, GraduationCap, Code, Briefcase, Mail, Languages, Menu, X} from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
@@ -14,6 +14,17 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSidebarOpen, setIsSidebarOpen }) => {
   const { language, toggleLanguage, t } = useLanguage()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024)
+
+  useEffect(() => {
+    console.log('isMobileMenuOpen changed to', isMobileMenuOpen)
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const menuItems = [
     { id: 'home', icon: Home, label: t('home') },
@@ -32,9 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSi
   return (
     <>
       {/* Bouton hamburger pour mobile */}
-      <motion.button
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+      <button
         onClick={() => {
           console.log('Hamburger clicked, toggling menu')
           setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -46,37 +55,27 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSi
         ) : (
           <Menu size={24} className="text-cyan-400" />
         )}
-      </motion.button>
+      </button>
 
       {/* Overlay pour mobile */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => {
-              console.log('Overlay clicked, closing menu')
-              setIsMobileMenuOpen(false)
-            }}
-            className="lg:hidden fixed inset-0 bg-black/50 z-40"
-          />
-        )}
-      </AnimatePresence>
+      {isMobileMenuOpen && (
+        <div
+          onClick={() => {
+            console.log('Overlay clicked, closing menu')
+            setIsMobileMenuOpen(false)
+          }}
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+        />
+      )}
 
       {/* Sidebar */}
       <motion.div
         initial={{ x: -300 }}
-        animate={{ 
-          x: 0,
-          // Sur mobile, la sidebar n'apparaît que si le menu est ouvert
+        animate={{
+          x: isMobile ? (isMobileMenuOpen ? 0 : -300) : (isSidebarOpen ? 0 : -300)
         }}
-        className={`
-             fixed left-0 top-0 h-full w-48 lg:w-80 bg-slate-800 shadow-2xl z-50 flex flex-col
-             ${isSidebarOpen ? 'lg:translate-x-0' : 'lg:-translate-x-full'}
-             ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-             transition-transform duration-300 ease-in-out
-           `}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="fixed left-0 top-0 h-full w-48 lg:w-80 bg-slate-800 shadow-2xl z-50 flex flex-col"
       >
         {/* Header avec nom */}
         <div className="p-8 border-b border-slate-700 flex justify-between items-center">
@@ -107,10 +106,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isSi
                 console.log('Close button clicked')
                 setIsMobileMenuOpen(false)
               }}
-              className="lg:hidden p-3 rounded-full bg-slate-700 hover:bg-red-500 transition-colors duration-300 text-gray-300 hover:text-white"
+              className="lg:hidden p-4 rounded-full bg-red-500 hover:bg-red-700 transition-colors duration-300 text-white"
               title="Fermer le menu"
             >
-              <X size={20} className="text-current" />
+              <X size={24} className="text-current" />
             </button>
           </div>
         </div>
