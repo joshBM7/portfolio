@@ -70,11 +70,11 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection }) =>
           // Sur mobile, la sidebar n'apparaît que si le menu est ouvert
         }}
         className={`
-          fixed left-0 top-0 h-full w-80 bg-slate-800 shadow-2xl z-50 flex flex-col
-          lg:translate-x-0 
-          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          transition-transform duration-300 ease-in-out
-        `}
+             fixed left-0 top-0 h-full w-64 lg:w-80 bg-slate-800 shadow-2xl z-50 flex flex-col
+             lg:translate-x-0
+             ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+             transition-transform duration-300 ease-in-out
+           `}
       >
         {/* Header avec nom */}
         <div className="p-8 border-b border-slate-700 flex justify-between items-center">
